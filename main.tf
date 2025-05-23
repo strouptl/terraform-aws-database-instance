@@ -41,6 +41,11 @@ variable "publicly_accessible" {
   default = false
 }
 
+variable "backup_retention_period" {
+  type = number
+  default = ""
+}
+
 variable "vpc_id" {
   type = string
   default = ""
@@ -62,7 +67,7 @@ resource "aws_db_instance" "main" {
   allocated_storage = var.allocated_storage
   max_allocated_storage = 100
   storage_encrypted = true
-  backup_retention_period = 35
+  backup_retention_period = var.backup_retention_period
   final_snapshot_identifier = join("-", [var.name, "final-snapshot"])
   db_subnet_group_name = (var.vpc_id == "" ? "default" : "default-${data.aws_vpc.selected.id}")
   vpc_security_group_ids = var.security_group_ids
