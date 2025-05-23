@@ -43,7 +43,7 @@ variable "publicly_accessible" {
 
 variable "backup_retention_period" {
   type = number
-  default = ""
+  default = 7
 }
 
 variable "vpc_id" {
